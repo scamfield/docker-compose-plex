@@ -1,0 +1,39 @@
+---
+version: "2"
+services:
+  plex:
+    privileged: true
+    image: ghcr.io/linuxserver/plex
+    container_name: plex
+    hostname: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+      - UMASK_SET=022
+#      - PLEX_CLAIM=<ENTER_CLAIM_TOKEN>
+      - TZ=Europe/London
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - LANGUAGE=en_US.UTF-8
+      - LANG=en_US.UTF-8
+      - TERM=xterm
+      - NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
+      - DEBIAN_FRONTEND=noninteractive
+      - PLEX_DOWNLOAD=https://downloads.plex.tv/plex-media-server-new
+      - PLEX_ARCH=amd64
+      - PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=/config/Library/Application Support
+      - PLEX_MEDIA_SERVER_HOME=/usr/lib/plexmediaserver
+      - PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS=6
+      - PLEX_MEDIA_SERVER_USER=abc
+      - PLEX_MEDIA_SERVER_INFO_VENDOR=docker
+      - PLEX_MEDIA_SERVER_INFO_DEVICE="Docker Container"
+      - HOME=/root
+    volumes:
+      - /volume1/docker/plex/config:/config
+      - /volume1/docker/plex/transcode:/transcode
+      - /volume1/Media:/media
+    devices:
+      - "/dev/dri/card0:/dev/dri/card0"
+      - "/dev/dri/renderD128:/dev/dri/renderD128"
+    restart: unless-stopped
