@@ -54,7 +54,7 @@ Thanks to [linuxserver.io](https://github.com/linuxserver) for maintaining a wid
 
 ## Note:
 
-This docker-compose can be used on a non-synology unit and could be used using portainer and stacks with a few tweaks.
+This docker-compose file could be used on a non-synology unit or deployed using portainer with stacks.
 
 ## Issues
 
